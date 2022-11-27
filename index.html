@@ -191,6 +191,35 @@
     </script>
 
     <script>//9
+        function checkExam(arrayTrue, arrayAnswers){
+            let mark = 0;
+            for(let i = 0; i < arrayTrue.length; i++){
+                if(arrayAnswers[i] == arrayTrue[i]){
+                    mark += 4;
+                }
+                else if(arrayAnswers[i] == ""){
+                    mark += 0;
+                }
+                else if(arrayAnswers[i] != arrayTrue[i]){
+                   mark -= 1;
+                }
+            }
+
+            if(mark < 0){
+                mark = 0;
+            }
+
+            return mark;
+        }
+
+        console.log("Check the exam");
+        console.log(checkExam(["a", "a", "b", "b"], ["a", "c", "b", "d"]));
+        console.log(checkExam(["a", "a", "c", "b"], ["a", "a", "b",  ""]));
+        console.log(checkExam(["a", "a", "b", "c"], ["a", "a", "b", "c"]));
+        console.log(checkExam(["b", "c", "b", "a"], ["",  "a", "a", "c"]));
+    </script>
+
+    <script>//10
 
     </script>
 </body>
