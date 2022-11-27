@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>//1
+        function wordCounter(text, word){
+            let array = text.split(" ");
+            let count = 0;
+            for (let index = 0; index < array.length; index++) {
+                if(word == array[index]){
+                    count++;
+                }
+            }
+
+            return count;
+        }
+
+        console.log("Count word occurences(1)");
+        console.log(wordCounter("Firstandhg j3rnjnfn second first secfirts first ghd", "first"));
+    </script>
+
+    <script>//1
+        function wordCounter(text, word){
+            let count = 0;
+            let index = text.indexOf(word);
+            while(index != -1){
+                index = text.indexOf(word, index + word.length);
+                count++;
+            }
+
+            return count;
+        }
+
+        console.log("Count word occurences(2)");
+        console.log(wordCounter("Firstandhgj3rfirstnjnfnsecondfirstsecfirtsfirstghd", "first"));
+    </script>
+
+    <script>//2
+        function getWords(text){
+            let array = text.split(" ");
+            let newArray = [];
+            for(let i = 0; i < array.length; i++){
+                let word = array[i];
+                for(let j = 0; j < word.length; j++){
+                    if(word[j] == word[j+1]){
+                        newArray.push(word);
+                    }
+                }
+            }
+
+            return newArray.join(", ");
+        }
+        console.log("My Aunt Sally");
+        console.log(getWords("skiing sport run running flying sopp"));
+        console.log(getWords("sking sport run runing flying sop"));
+    </script>
+
+    <script>//?3
+        let listWords = ['MONKEY', 'TOMATO', 'BOOK', 'LOCAL', 'CRUSH', 'FIRST', 'KEY', 'PUSH'];
+        function getLongestWord(text){
+            let countLetters = 0;
+            let inputArray = [];
+            for(let i = 0; i < listWords.length; i++){
+                let word = listWords[i];             
+                    for(let j = 0; j < word.length; j++){
+                        if(text.includes(word[j]))
+                        {
+                            countLetters++;
+                        }
+                        if(countLetters == word.length + 1)
+                        {
+                            inputArray.push(word);
+                        }
+                    } 
+            }
+
+            return inputArray.join(" ");
+        }
+
+        console.log("Обратный отсчёт");
+        console.log(getLongestWord("WEKYP"));
+    </script>
+
+    <script>//4
+        function pushString(text, str){
+           return `${text} ${str}`;
+        }
+
+        console.log("ES6 String Addition");
+        let starText = console.log(pushString("Hello","world"));
+    </script>
+
+    <script>//?5
+        let array = [1,2,3,4,5,6,7];
+        function getShaffledArray(){
+                let newArray = array.sort(function(){
+                    return Math.random() - 0.5;
+                });
+
+            return newArray;
+        }
+
+        console.log("Shuffled Array");
+        console.log(getShaffledArray());
+    </script>
+
+    <script>//6
+        let arrayOfArrays = [[1,5,6,2,10], [1,2,5,8,9], [1,2,3]];
+        function sumAverage(arrayOfArrays){
+            let sumAverages = 0, sum = 0;
+            for(let i = 0; i < arrayOfArrays.length; i++){
+                sum = 0;
+                let partOfArray = arrayOfArrays[i];
+                for(let j = 0; j < partOfArray.length; j++){
+                    sum += partOfArray[j];
+                }
+
+                sumAverages += sum / partOfArray.length;
+            }
+
+            return Math.floor(sumAverages);
+        }
+
+        console.log("Sum of Array Averages");
+        console.log(sumAverage(arrayOfArrays));
+    </script>
+
+    <script>//7
+        let str1 = "bvfhksEnGLishgm";
+        let str2 = "sjejfnjneglishj";
+        function containsWord(text, word){
+            return text.toUpperCase().includes(word.toUpperCase()) ? true : false;
+        }
+
+        console.log("Do you speak English?");
+        console.log(containsWord(str1, "english"));
+        console.log(containsWord(str2, "english"));
+    </script>
+        
+    <script>//8
+        function firstMethod(str, word){
+            let array = str.split(" ");
+            let count = 0;
+            for (let index = 0; index < array.length; index++) {
+                if(word == array[index]){
+                    count++;
+                }
+            }
+
+            return {matches : count, newString : ""}
+        }
+
+        function secondMethod(str, word, changeWord){
+            let array = str.split(" ");
+            let countChanges = 0;
+            for (let index = 0; index < array.length; index++) {
+                if(word == array[index]){
+                    array[index] = changeWord;
+                    countChanges++;
+                }
+            }
+
+            let newString = array.join(" ");
+            return {matches: countChanges, newString: newString};
+        }
+
+        function searchEng(str, method, word, changeWord){
+            switch(method){
+                case 1: 
+                return firstMethod(str, word);
+                break;
+
+                case 2:
+                return secondMethod(str, word, changeWord);
+                break;
+
+                default:
+                return "No valid input";
+            }            
+        }
+
+        console.log("Building a mini search engine");
+        console.log(searchEng('OMG, today is a good day !', 1, 'day'));
+        console.log(searchEng('Today is my day !', 2, 'day', 'birthday'));
+        console.log(searchEng('OMG, today is Monday !','day', 1));
+    </script>
+
+    <script>//9
+
+    </script>
+</body>
+</html>
