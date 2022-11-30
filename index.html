@@ -220,7 +220,147 @@
     </script>
 
     <script>//10
+        A = new Set();
+        B = new Set();
+        A.add(1); A.add(2); A.add(3); A.add(4);
+        B.add(3); B.add(4); B.add(5);
+        function inter(set1, set2){
+            A = new Set();
+            set1.forEach(element => {
+                if(set2.has(element)){
+                    A.add(element);
+                }
+            });
 
+            return A;
+        }
+
+        console.log("Playing with Sets : Intersection");
+        console.log(inter(A, B));
+    </script>
+
+    <script>//11
+        A1 = new Set();
+        B1 = new Set();
+        C1 = new Set();
+        A1.add(1); A1.add(2); A1.add(3); A1.add(4);
+        B1.add(3); B1.add(4); B1.add(5);
+        C1.add(4); C1.add(5); C1.add(3);
+        function areEqual(set1, set2){
+            let count = 0;
+            if(set1.size != set2.size){
+                return false;
+            }
+            set1.forEach(element => {
+                if(!set2.has(element)){
+                    return false;
+                }
+            });
+
+            return true;
+        }
+
+        function notEqual(set1, set2){
+            let count = 0;
+            if(set1.size != set2.size){
+                return true;
+            }
+            set1.forEach(element => {
+                if(!set2.has(element)){
+                    return true;
+                }
+            });
+
+            return false;
+        }
+
+        console.log("Playing with Sets : Equal or Not ?");
+        console.log(areEqual(A1, B1));
+        console.log(areEqual(B1, C1));
+        console.log(notEqual(B1, C1));
+    </script>
+
+    <script>//12??
+        function newsort(array){
+            let items = 0;
+            for(let j = 0; j < array.length; j++){
+                if(array[j] > 0)
+                {
+                    items++;
+                }
+            }
+           
+            if(items == array.length){
+                let result = function(array) {
+                    for(let i = 0; i < array.length - 1; i++){
+                        for(let j = i + 1; j < array.length; j++){
+                            if(array[i] > array[j]){
+                                let tmp = array[i];
+                                array[i] = array[j];
+                                array[j] = tmp;
+                            }
+                        }   
+                    }
+
+                    return array;
+                };
+
+                return result(array);
+            }
+            else{
+                return array;
+            }  
+        }
+
+        console.log("SORT");
+        console.log(newsort([3, 2, 6, 1, 5]));
+        console.log(newsort([3, 2, 1, -6]));
+    </script>
+
+    <script>//13??
+        let queue = [1, 2, 3, 4];
+        function enqueue(element){
+            return queue.push(element);
+        }
+
+        function dequeue(){
+           return queue.shift();
+        }
+
+        function size(){
+            return queue.length;
+        }
+
+        console.log("FIFO");
+        console.log(queue.enqueue(6));
+        console.log(queue.dequeue());
+        console.log(queue.size());
+    </script>
+
+    <script>//14
+        function sumOfDifferences(array){
+            array.sort((a,b) => b - a);
+            let sum = 0;
+            console.log(array);
+            for (let i = 0; i < array.length - 1; i++) {
+                sum += array[i] - array[i + 1];
+            }
+
+            return sum;
+        }
+
+        console.log("Sum of Differnces");
+        console.log(sumOfDifferences([10, 2, 1, 5]));
+    </script>
+        
+    <script>//15
+        function daysInAYear(year){
+            return year % 4 == 0 ? 366 : 365;
+        }
+
+        console.log("Days in a year");
+        console.log(daysInAYear(2004));
+        console.log(daysInAYear(2003));
     </script>
 </body>
 </html>
