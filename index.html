@@ -280,7 +280,7 @@
         console.log(notEqual(B1, C1));
     </script>
 
-    <script>//12??
+    <script>//12    
         function newsort(array){
             let items = 0;
             for(let j = 0; j < array.length; j++){
@@ -317,19 +317,21 @@
         console.log(newsort([3, 2, 1, -6]));
     </script>
 
-    <script>//13??
+    <script>//13
         let queue = [1, 2, 3, 4];
-        function enqueue(element){
-            return queue.push(element);
-        }
+        queue.enqueue = function(element){
+            queue.push(element);
+            return queue;
+        };
 
-        function dequeue(){
-           return queue.shift();
-        }
+        queue.dequeue = function(){
+            queue.shift();
+            return queue;
+        };
 
-        function size(){
+        queue.size = function (){
             return queue.length;
-        }
+        };
 
         console.log("FIFO");
         console.log(queue.enqueue(6));
