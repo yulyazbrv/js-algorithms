@@ -7,60 +7,36 @@
     <title>Document</title>
 </head>
 <body>
-    <script>//1
-        function wordCounter(text, word){
-            let array = text.split(" ");
-            let count = 0;
-            for (let index = 0; index < array.length; index++) {
-                if(word == array[index]){
-                    count++;
-                }
-            }
+    <script>//1!!!
+        var wordCounter = function(text) {
+            text = text.match(/[a-zA-Z']+/g);
+            if(!text){
+                return {count: 0};
+            } 
+            let words = {};
+            text.forEach(x => {
+                if(words[x]){
+                    words[x]++;
+                } 
+                else{
+                words[x] = 1;
+                } 
+            });
+  
+            return {count: word => words[word] || 0}
+        };
 
-            return count;
-        }
-
-        console.log("Count word occurences(1)");
-        console.log(wordCounter("Firstandhg j3rnjnfn second first secfirts first ghd", "first"));
     </script>
 
-    <script>//1
-        function wordCounter(text, word){
-            let count = 0;
-            let index = text.indexOf(word);
-            while(index != -1){
-                index = text.indexOf(word, index + word.length);
-                count++;
-            }
-
-            return count;
+    <script>//2!!!
+        function myAuntSally(str) {
+            return  str.split(' ')
+            .filter(w => (w.match(/([a-z])\1+/i) || [''])[0].length == 2)
+            .join(' ');
         }
-
-        console.log("Count word occurences(2)");
-        console.log(wordCounter("Firstandhgj3rfirstnjnfnsecondfirstsecfirtsfirstghd", "first"));
     </script>
 
-    <script>//2
-        function getWords(text){
-            let array = text.split(" ");
-            let newArray = [];
-            for(let i = 0; i < array.length; i++){
-                let word = array[i];
-                for(let j = 0; j < word.length; j++){
-                    if(word[j] == word[j+1]){
-                        newArray.push(word);
-                    }
-                }
-            }
-
-            return newArray.join(", ");
-        }
-        console.log("My Aunt Sally");
-        console.log(getWords("skiing sport run running flying sopp"));
-        console.log(getWords("sking sport run runing flying sop"));
-    </script>
-
-    <script>//?3
+    <script>//3???
         let listWords = ['MONKEY', 'TOMATO', 'BOOK', 'LOCAL', 'CRUSH', 'FIRST', 'KEY', 'PUSH'];
         function getLongestWord(text){
             let countLetters = 0;
@@ -86,17 +62,13 @@
         console.log(getLongestWord("WEKYP"));
     </script>
 
-    <script>//4
+    <script>//4!!!
         function pushString(text, str){
            return `${text} ${str}`;
         }
-
-        console.log("ES6 String Addition");
-        let starText = console.log(pushString("Hello","world"));
     </script>
 
-    <script>//?5
-        let array = [1,2,3,4,5,6,7];
+    <script>//5!!!
         function getShaffledArray(){
                 let newArray = array.sort(function(){
                     return Math.random() - 0.5;
@@ -104,265 +76,149 @@
 
             return newArray;
         }
-
-        console.log("Shuffled Array");
-        console.log(getShaffledArray());
     </script>
 
-    <script>//6
-        let arrayOfArrays = [[1,5,6,2,10], [1,2,5,8,9], [1,2,3]];
-        function sumAverage(arrayOfArrays){
-            let sumAverages = 0, sum = 0;
-            for(let i = 0; i < arrayOfArrays.length; i++){
-                sum = 0;
-                let partOfArray = arrayOfArrays[i];
+    <script>//6!!!
+        const sumAverage = (arr) => {
+            let result = 0;
+            for(let i = 0; i < arr.length; i++){
+                let sum = 0;
+                let partOfArray = arr[i];
                 for(let j = 0; j < partOfArray.length; j++){
                     sum += partOfArray[j];
                 }
 
-                sumAverages += sum / partOfArray.length;
+                result += (sum / partOfArray.length);
             }
 
-            return Math.floor(sumAverages);
-        }
-
-        console.log("Sum of Array Averages");
-        console.log(sumAverage(arrayOfArrays));
+            return Math.floor(result);
+        }       
     </script>
 
-    <script>//7
-        let str1 = "bvfhksEnGLishgm";
-        let str2 = "sjejfnjneglishj";
-        function containsWord(text, word){
-            return text.toUpperCase().includes(word.toUpperCase()) ? true : false;
+    <script>//7!!!
+        function spEng(sentence){
+            return sentence.toUpperCase()
+            .includes("english".toUpperCase()) ? true : false;
         }
-
-        console.log("Do you speak English?");
-        console.log(containsWord(str1, "english"));
-        console.log(containsWord(str2, "english"));
     </script>
         
-    <script>//8
-        function firstMethod(str, word){
-            let array = str.split(" ");
-            let count = 0;
-            for (let index = 0; index < array.length; index++) {
-                if(word == array[index]){
-                    count++;
-                }
+    <script>//8!!!
+        function searchEng(string,searchWord,searchMethod,newWord) {
+            if ( /[^a-z0-9]/i.test(searchWord) || /[^a-z0-9]/i.test(newWord) || (searchMethod != 1 && searchMethod != 2) ){
+                return 'No valid input';
             }
-
-            return {matches : count, newString : ""}
-        }
-
-        function secondMethod(str, word, changeWord){
-            let array = str.split(" ");
-            let countChanges = 0;
-            for (let index = 0; index < array.length; index++) {
-                if(word == array[index]){
-                    array[index] = changeWord;
-                    countChanges++;
-                }
+            let res = {}; 
+            const pattern = new RegExp('\\b' + searchWord + '\\b' ,'g');
+  
+            if (searchMethod === 1) {
+                res.matches = (string.match(pattern) || []).length;
+                res.newString = '';
             }
-
-            let newString = array.join(" ");
-            return {matches: countChanges, newString: newString};
+  
+            if (searchMethod === 2) {
+                res.matches = (string.match(pattern) || []).length;
+                res.newString = string.replace(pattern, newWord);
+            }
+  
+            return res;
         }
-
-        function searchEng(str, method, word, changeWord){
-            switch(method){
-                case 1: 
-                return firstMethod(str, word);
-                break;
-
-                case 2:
-                return secondMethod(str, word, changeWord);
-                break;
-
-                default:
-                return "No valid input";
-            }            
-        }
-
-        console.log("Building a mini search engine");
-        console.log(searchEng('OMG, today is a good day !', 1, 'day'));
-        console.log(searchEng('Today is my day !', 2, 'day', 'birthday'));
-        console.log(searchEng('OMG, today is Monday !','day', 1));
     </script>
 
-    <script>//9
-        function checkExam(arrayTrue, arrayAnswers){
+    <script>//9!!!
+        function checkExam(array1, array2) {
             let mark = 0;
-            for(let i = 0; i < arrayTrue.length; i++){
-                if(arrayAnswers[i] == arrayTrue[i]){
+            for(let i = 0; i < array1.length; i++){
+                if(array2[i] == array1[i]){
                     mark += 4;
                 }
-                else if(arrayAnswers[i] == ""){
-                    mark += 0;
+                else if(array2[i] == ""){
+                    mark;
                 }
-                else if(arrayAnswers[i] != arrayTrue[i]){
-                   mark -= 1;
+                else if(array1[i] != array2[i]){
+                   mark --;
                 }
             }
 
-            if(mark < 0){
-                mark = 0;
-            }
-
-            return mark;
-        }
-
-        console.log("Check the exam");
-        console.log(checkExam(["a", "a", "b", "b"], ["a", "c", "b", "d"]));
-        console.log(checkExam(["a", "a", "c", "b"], ["a", "a", "b",  ""]));
-        console.log(checkExam(["a", "a", "b", "c"], ["a", "a", "b", "c"]));
-        console.log(checkExam(["b", "c", "b", "a"], ["",  "a", "a", "c"]));
+            return mark < 0 ? 0 : mark;;
+        }   
     </script>
 
-    <script>//10
-        A = new Set();
-        B = new Set();
-        A.add(1); A.add(2); A.add(3); A.add(4);
-        B.add(3); B.add(4); B.add(5);
-        function inter(set1, set2){
+    <script>//10!!!
+        function inter(s1, s2){
             A = new Set();
-            set1.forEach(element => {
-                if(set2.has(element)){
+            s1.forEach(element => {
+                if(s2.has(element)){
                     A.add(element);
                 }
             });
 
             return A;
         }
-
-        console.log("Playing with Sets : Intersection");
-        console.log(inter(A, B));
     </script>
 
-    <script>//11
-        A1 = new Set();
-        B1 = new Set();
-        C1 = new Set();
-        A1.add(1); A1.add(2); A1.add(3); A1.add(4);
-        B1.add(3); B1.add(4); B1.add(5);
-        C1.add(4); C1.add(5); C1.add(3);
-        function areEqual(set1, set2){
+    <script>//11!!!
+        function areEqual(s1, s2){
             let count = 0;
-            if(set1.size != set2.size){
-                return false;
-            }
-            set1.forEach(element => {
-                if(!set2.has(element)){
-                    return false;
-                }
-            });
-
-            return true;
-        }
-
-        function notEqual(set1, set2){
-            let count = 0;
-            if(set1.size != set2.size){
-                return true;
-            }
-            set1.forEach(element => {
-                if(!set2.has(element)){
-                    return true;
-                }
-            });
-
-            return false;
-        }
-
-        console.log("Playing with Sets : Equal or Not ?");
-        console.log(areEqual(A1, B1));
-        console.log(areEqual(B1, C1));
-        console.log(notEqual(B1, C1));
-    </script>
-
-    <script>//12    
-        function newsort(array){
-            let items = 0;
-            for(let j = 0; j < array.length; j++){
-                if(array[j] > 0)
-                {
-                    items++;
+            if(s1.size === s2.size){
+               if(Array.from(s1).every(element => s2.has(element))){
+                  return true;
                 }
             }
-           
-            if(items == array.length){
-                let result = function(array) {
-                    for(let i = 0; i < array.length - 1; i++){
-                        for(let j = i + 1; j < array.length; j++){
-                            if(array[i] > array[j]){
-                                let tmp = array[i];
-                                array[i] = array[j];
-                                array[j] = tmp;
-                            }
-                        }   
-                    }
-
-                    return array;
-                };
-
-                return result(array);
-            }
-            else{
-                return array;
-            }  
+            else{ 
+              return false;
+            }   
         }
 
-        console.log("SORT");
-        console.log(newsort([3, 2, 6, 1, 5]));
-        console.log(newsort([3, 2, 1, -6]));
+        function notEqual(s1, s2){
+            return !areEqual(s1, s2);
+        }
     </script>
 
-    <script>//13
-        let queue = [1, 2, 3, 4];
-        queue.enqueue = function(element){
-            queue.push(element);
-            return queue;
-        };
-
-        queue.dequeue = function(){
-            queue.shift();
-            return queue;
-        };
-
-        queue.size = function (){
-            return queue.length;
-        };
-
-        console.log("FIFO");
-        console.log(queue.enqueue(6));
-        console.log(queue.dequeue());
-        console.log(queue.size());
+    <script>//12!!!    
+        Array.prototype.sort = function () { 
+            return [...(new Int32Array(this)).sort()] 
+        }
     </script>
 
-    <script>//14
-        function sumOfDifferences(array){
-            array.sort((a,b) => b - a);
+    <script>//13!!!
+        var Queue = function() {
+            this.queue = [];   
+        };
+
+        Queue.prototype.enqueue = function(item) {
+            return this.queue.push(item);
+        };
+
+        Queue.prototype.dequeue = function() {
+            return this.queue.shift();
+        };
+
+        Queue.prototype.size = function() {
+            return this.queue.length;
+        };
+    </script>
+
+    <script>//14!!!
+        function sumOfDifferences(arr) {
+            arr.sort((a,b) => b - a);
             let sum = 0;
-            console.log(array);
-            for (let i = 0; i < array.length - 1; i++) {
-                sum += array[i] - array[i + 1];
+            for (let i = 0; i < arr.length - 1; i++) {
+                sum += arr[i] - arr[i + 1];
             }
-
             return sum;
         }
-
-        console.log("Sum of Differnces");
-        console.log(sumOfDifferences([10, 2, 1, 5]));
     </script>
         
-    <script>//15
-        function daysInAYear(year){
-            return year % 4 == 0 ? 366 : 365;
-        }
+    <script>//15!!!
+        function yearDays(year){
+            if(year == 0) return `${year} has 366 days`
 
-        console.log("Days in a year");
-        console.log(daysInAYear(2004));
-        console.log(daysInAYear(2003));
+            if(year%100 == 0 && year%400 !== 0) return `${year} has 365 days`
+
+            if(year%4 !== 0) return `${year} has 365 days`
+
+            return `${year} has 366 days`
+        }
     </script>
 </body>
 </html>
