@@ -36,32 +36,6 @@
         }
     </script>
 
-    <script>//3???
-        let listWords = ['MONKEY', 'TOMATO', 'BOOK', 'LOCAL', 'CRUSH', 'FIRST', 'KEY', 'PUSH'];
-        function getLongestWord(text){
-            let countLetters = 0;
-            let inputArray = [];
-            for(let i = 0; i < listWords.length; i++){
-                let word = listWords[i];             
-                    for(let j = 0; j < word.length; j++){
-                        if(text.includes(word[j]))
-                        {
-                            countLetters++;
-                        }
-                        if(countLetters == word.length + 1)
-                        {
-                            inputArray.push(word);
-                        }
-                    } 
-            }
-
-            return inputArray.join(" ");
-        }
-
-        console.log("Обратный отсчёт");
-        console.log(getLongestWord("WEKYP"));
-    </script>
-
     <script>//4!!!
         function pushString(text, str){
            return `${text} ${str}`;
@@ -174,9 +148,18 @@
         }
     </script>
 
-    <script>//12!!!    
-        Array.prototype.sort = function () { 
-            return [...(new Int32Array(this)).sort()] 
+    <script> 
+        Array.prototype.sort = function () {
+            for(let i = 0; i < this.length; i++) {
+                for (let j = i; j < this.length; j++) {
+                    if (this[i] > this[j]) {
+                        let tmp = this[i];
+                        this[i] = this[j];
+                        this[j] = tmp;
+                    }
+                }
+            }
+            return this;
         }
     </script>
 
